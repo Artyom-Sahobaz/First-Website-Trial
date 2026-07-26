@@ -216,5 +216,79 @@ if(buyerForm && buyerImage){
     buyerObserver.observe(buyerForm);
 
 }
+// ===========================
+// TRUST SECTION
+// ===========================
+
+const trustCards = document.querySelectorAll(".trust-card");
+
+if(trustCards.length){
+
+    const trustObserver = new IntersectionObserver((entries)=>{
+
+        entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+                trustCards.forEach((card,index)=>{
+
+                    setTimeout(()=>{
+
+                        card.classList.add("show");
+
+                    },index*180);
+
+                });
+
+            }
+
+        });
+
+    },{
+
+        threshold:.25
+
+    });
+
+    trustObserver.observe(trustCards[0]);
+
+}
+// ===========================
+// RESOURCES SECTION
+// ===========================
+
+const resourceCards = document.querySelectorAll(".resource-card");
+
+if(resourceCards.length){
+
+    const resourceObserver = new IntersectionObserver((entries)=>{
+
+        entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+                resourceCards.forEach((card,index)=>{
+
+                    setTimeout(()=>{
+
+                        card.classList.add("show");
+
+                    },index*180);
+
+                });
+
+            }
+
+        });
+
+    },{
+
+        threshold:.25
+
+    });
+
+    resourceObserver.observe(resourceCards[0]);
+
+}
 
 });
