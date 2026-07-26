@@ -1,63 +1,148 @@
 document.addEventListener("DOMContentLoaded", () => {
+
     const typewriterElement = document.getElementById("typewriter-container");
-    
-    if (typewriterElement) {
-        // Break down the text and HTML tags into an array sequence
+
+    if(typewriterElement){
+
         const tokens = [
             ..."Sell Your Mobile Home",
             "<br>",
             ..."Fast for ",
-            "<span>", 
-            ..."Cash", 
+            "<span>",
+            ..."Cash",
             "</span>"
         ];
-        
-        let i = 0;
-        let currentText = "";
-        
-        function type() {
-            if (i < tokens.length) {
-                currentText += tokens[i];
-                
-                // Update the text and keep the cursor at the very end
-                typewriterElement.innerHTML = currentText + '<span class="cursor">|</span>';
-                i++;
-                
-                // If the token is an HTML tag (length > 1), type it instantly (0ms). 
-                // Otherwise, add a natural typing delay (40ms - 90ms).
-                const isTag = tokens[i - 1].length > 1;
-                const typingSpeed = isTag ? 0 : Math.random() * 50 + 40;
-                
-                setTimeout(type, typingSpeed);
+
+        let index = 0;
+        let output = "";
+
+        function type(){
+
+            if(index >= tokens.length){
+                return;
             }
+
+            output += tokens[index];
+
+            typewriterElement.innerHTML =
+                output + '<span class="cursor">|</span>';
+
+            const current = tokens[index];
+
+            index++;
+
+            // Detect HTML tags properly
+            if(current.startsWith("<")){
+                setTimeout(type,0);
+            }else{
+                setTimeout(type,45);
+            }
+
         }
-        
-        // Start the animation with a slight 500ms delay after page load
-        setTimeout(type, 500);
+
+        setTimeout(type,500);
+
     }
-});
-const cards = document.querySelectorAll(".step-card");
 
-const observer = new IntersectionObserver((entries)=>{
 
-    entries.forEach(entry=>{
+    // ===========================
+    // HOW IT WORKS ANIMATION
+    // ===========================
 
-        if(entry.isIntersecting){
+    const cards = document.querySelectorAll(".step-card");
 
-            const index = [...cards].indexOf(entry.target);
+    if(cards.length){
 
-            setTimeout(()=>{
+        const observer = new IntersectionObserver((entries)=>{
 
-                entry.target.classList.add("show");
+            entries.forEach(entry=>{
 
-            }, index * 180);
+                if(entry.isIntersecting){
 
-        }
+                    const index = [...cards].indexOf(entry.target);
+
+                    setTimeout(()=>{
+
+                        entry.target.classList.add("show");
+
+                    },index*180);
+
+                }
+
+            });
+
+        },{
+
+            threshold:0.25
+
+        });
+
+        cards.forEach(card=>observer.observe(card));
+
+    }
+    const whyImage = document.querySelector(".why-image img");
+
+if(whyImage){
+
+    const imageObserver = new IntersectionObserver((entries)=>{
+
+        entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+                whyImage.classList.add("show");
+
+            }
+
+        });
+
+    },{
+
+        threshold:.3
 
     });
 
-},{
-    threshold:.25
-});
+    imageObserver.observe(whyImage);
 
-cards.forEach(card=>observer.observe(card));
+}
+
+
+// ===========================
+// WHY US FEATURE ANIMATION
+// ===========================
+
+const features = document.querySelectorAll(".feature-card");
+
+if(features.length){
+
+    const featureObserver = new IntersectionObserver((entries)=>{
+
+        entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+                const index = [...features].indexOf(entry.target);
+
+                setTimeout(()=>{
+
+                    entry.target.classList.add("show");
+
+                }, index * 140);
+
+                featureObserver.unobserve(entry.target);
+
+            }
+
+        });
+
+    },{
+
+        threshold:0.25
+
+    });
+
+    features.forEach(feature=>featureObserver.observe(feature));
+
+}
+
+});
