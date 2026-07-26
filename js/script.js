@@ -144,5 +144,41 @@ if(features.length){
     features.forEach(feature=>featureObserver.observe(feature));
 
 }
+//Sec 4
+
+// ===========================
+// SELLER SECTION ANIMATION
+// ===========================
+
+const sellerInfo = document.querySelector(".seller-info");
+const sellerForm = document.querySelector(".seller-form");
+
+const sellerObserver = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            sellerInfo.classList.add("show");
+
+            setTimeout(()=>{
+
+                sellerForm.classList.add("show");
+
+            },250);
+
+        }
+
+    });
+
+},{
+    threshold:.25
+});
+
+if(sellerInfo){
+
+    sellerObserver.observe(sellerInfo);
+
+}
 
 });

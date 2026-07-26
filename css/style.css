@@ -670,7 +670,7 @@ grid-template-columns:1fr;
 
 .why-us{
 
-    padding:120px 0;
+    padding:120px 0 180px;
 
     background:#F8FCFB;
 
@@ -889,6 +889,259 @@ grid-template-columns:1fr;
 @media(max-width:900px){
 
     .why-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+//SEC4//
+
+/* ==========================================
+   SELLER SECTION
+========================================== */
+
+.seller-section{
+
+    padding:180px 0 120px;
+
+}
+
+.seller-grid{
+
+    display:grid;
+
+    grid-template-columns:420px 1fr;
+
+    gap:70px;
+
+    align-items:start;
+
+    margin-top:70px;
+
+}
+
+/* Left Side */
+
+.seller-info{
+
+    opacity:0;
+
+    transform:translateX(-70px);
+
+    transition:1s cubic-bezier(.2,.8,.2,1);
+
+}
+
+.seller-info.show{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+}
+
+.seller-info h3{
+
+    font-size:32px;
+
+    color:#183153;
+
+    margin-bottom:30px;
+
+}
+
+.benefit{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:18px 22px;
+
+    margin-bottom:16px;
+
+    border-radius:18px;
+
+    background:#F8FCFB;
+
+    border:1px solid rgba(93,187,123,.15);
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+.benefit:hover{
+
+    transform:translateX(8px);
+
+    background:#ffffff;
+
+    box-shadow:0 18px 40px rgba(0,0,0,.08);
+
+}
+
+/* Form */
+
+.seller-form{
+
+    background:white;
+
+    padding:45px;
+
+    border-radius:28px;
+
+    border:1px solid rgba(93,187,123,.15);
+
+    box-shadow:0 25px 70px rgba(0,0,0,.08);
+
+    display:grid;
+
+    gap:20px;
+
+    opacity:0;
+
+    transform:translateX(70px);
+
+    transition:1s cubic-bezier(.2,.8,.2,1);
+
+}
+
+.seller-form.show{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+}
+
+/* Inputs */
+
+.seller-form input,
+.seller-form textarea{
+
+    width:100%;
+
+    padding:18px 20px;
+
+    border-radius:14px;
+
+    border:1px solid #DCE5EB;
+
+    background:#FAFCFD;
+
+    font-size:15px;
+
+    font-family:inherit;
+
+    transition:.35s;
+
+    outline:none;
+
+}
+
+.seller-form textarea{
+
+    resize:none;
+
+}
+
+.seller-form input:focus,
+.seller-form textarea:focus{
+
+    border-color:#5DBB7B;
+
+    background:white;
+
+    box-shadow:0 0 0 5px rgba(93,187,123,.15);
+
+}
+
+/* Button */
+
+.submit-btn{
+
+    margin-top:10px;
+
+    border:none;
+
+    background:#5DBB7B;
+
+    color:white;
+
+    padding:18px;
+
+    border-radius:14px;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
+
+.submit-btn:hover{
+
+    transform:translateY(-4px);
+
+    background:#49A96C;
+
+    box-shadow:0 20px 40px rgba(93,187,123,.35);
+
+}
+
+.submit-btn:active{
+
+    transform:scale(.98);
+
+}
+/* Logo under benefits */
+
+.seller-logo{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:40px;
+
+    opacity:.95;
+
+}
+
+.seller-logo img{
+
+    width:500px;
+
+    max-width:300%;
+
+    height:auto;
+
+    transition:.4s ease;
+
+    filter:drop-shadow(0 20px 40px rgba(0,0,0,.10));
+
+}
+
+.seller-logo img:hover{
+
+    transform:translateY(-6px) scale(1.03);
+
+}
+
+/* Mobile */
+
+@media(max-width:900px){
+
+    .seller-grid{
 
         grid-template-columns:1fr;
 
