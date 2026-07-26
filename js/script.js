@@ -180,5 +180,41 @@ if(sellerInfo){
     sellerObserver.observe(sellerInfo);
 
 }
+// ===========================
+// BUYER SECTION ANIMATION
+// ===========================
+
+const buyerForm = document.querySelector(".buyer-form");
+const buyerImage = document.querySelector(".buyer-image");
+
+if(buyerForm && buyerImage){
+
+    const buyerObserver = new IntersectionObserver((entries)=>{
+
+        entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+                buyerForm.classList.add("show");
+
+                setTimeout(()=>{
+
+                    buyerImage.classList.add("show");
+
+                },250);
+
+            }
+
+        });
+
+    },{
+
+        threshold:.25
+
+    });
+
+    buyerObserver.observe(buyerForm);
+
+}
 
 });
