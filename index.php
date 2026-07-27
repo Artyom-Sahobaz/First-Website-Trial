@@ -1,52 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$pageTitle = "Cash4MobileHomes";
+include 'includes/header.php';
+?>
 
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title><span class="green-text">Cash4Mobile</span><span class="blue-text">Homes</span></title>
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-</head>
-
-<body>
-
-    <!-- =========================================
-         HEADER
-    ========================================== -->
-
-    <header class="header">
-
-        <div class="container">
-
-            <a href="#home" class="logo">
-                <span class="green-text">Cash4Mobile</span><span class="blue-text">Homes</span>
-            </a>
-
-            <nav>
-
-                <ul class="nav-links">
-
-                     <li><a href="#home">Home</a></li>
-                     <li><a href="#how-it-works">How It Works</a></li>
-                     <li><a href="#seller-form">Sell</a></li>
-                     <li><a href="#buy">Buy</a></li>
-                     <li><a href="#articles">Resources</a></li>
-                     <li><a href="#contact">Contact Us</a></li>
-
-                </ul>
-
-            </nav>
-
-        </div>
-
-    </header>
+    
 
 <!-- =========================================
      HERO SECTION
@@ -684,13 +641,13 @@
 
         <div class="resources-button">
 
-            <a href="resources.html" class="outline-btn">
+              <a href="resources.php" class="btn outline-btn">
 
-                Explore All Resources
+             Explore All Articles
 
-            </a>
+             </a>
 
-        </div>
+</div>
 
     </div>
 
@@ -792,129 +749,5 @@
     </div>
 
 </section>
-<!-- =========================================
-                FOOTER
-========================================= -->
 
-<footer class="footer">
-
-    <div class="container">
-
-        <div class="footer-content">
-
-            <!-- About -->
-
-            <div class="footer-brand">
-
-                <h3>About Us</h3>
-
-                <p>
-
-                    Cash4MobileHomes helps homeowners across Alabama buy and
-                    sell mobile homes with confidence. We provide fair offers,
-                    a simple process, and friendly support every step of the way.
-
-                </p>
-
-            </div>
-
-            <!-- Navigation -->
-
-            <div class="footer-nav">
-
-                <h3>Navigation</h3>
-
-                <a href="#home">Home</a>
-
-                <a href="#sell">Sell</a>
-
-                <a href="#buy">Buy</a>
-
-                <a href="#resources">Resources</a>
-
-                <a href="#contact">Contact</a>
-
-            </div>
-
-            <!-- Contact Details -->
-
-            <div class="footer-contact">
-
-                <h3>Contact Details</h3>
-
-                <a href="tel:+11234567890">
-
-                    (123) 456-7890
-
-                </a>
-
-                <a href="mailto:hello@cash4mobilehomes.com">
-
-                    hello@cash4mobilehomes.com
-
-                </a>
-
-                <span>
-
-                    Based in Alabama, USA
-
-                </span>
-
-            </div>
-
-            <!-- Follow Us -->
-
-            <div class="footer-social">
-
-                <h3>Follow Us</h3>
-
-                <a href="#" target="_blank">Facebook</a>
-
-                <a href="#" target="_blank">Instagram</a>
-
-                <a href="#" target="_blank">LinkedIn</a>
-
-                <a href="#" target="_blank">YouTube</a>
-
-            </div>
-
-        </div>
-
-        <!-- Bottom -->
-
-        <div class="footer-bottom">
-
-            <div class="footer-legal">
-
-                <a href="terms.html">
-
-                    Terms & Conditions
-
-                </a>
-
-                <a href="privacy.html">
-
-                    Privacy Policy
-
-                </a>
-
-            </div>
-
-            <p>
-
-                © 2026 Cash4MobileHomes. All Rights Reserved.
-
-            </p>
-
-        </div>
-
-    </div>
-
-</footer>
-
-
-    <script src="js/script.js"></script>
-
-</body>
-
-</html>
+<?php include 'includes/footer.php'; ?>
