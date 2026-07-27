@@ -2,10 +2,10 @@
    GOOGLE FONT
 ========================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&display=swap');
 body{
-    font-family:'Manrope',sans-serif;
+    font-family: "JetBrains Mono", monospace;
 }
 .blue-text{
 
@@ -17,7 +17,17 @@ body{
     color:#5DBB7B;
 
 }
+button,
+.btn,
+.hero-buttons a,
+.cta-button,
+.primary-btn,
+.secondary-btn{
 
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+
+}
 
 /* ==========================================
    RESET
