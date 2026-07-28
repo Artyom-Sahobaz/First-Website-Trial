@@ -2,6 +2,12 @@
 
 $pageTitle = "Resources";
 
+require_once 'includes/config.php';
+
+// Fetch all published articles
+$stmt = $pdo->query("SELECT * FROM articles WHERE status='Published' ORDER BY created_at DESC");
+$articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 include 'includes/header.php';
 
 ?>
@@ -9,15 +15,12 @@ include 'includes/header.php';
 <section class="resources-hero">
 
     <div class="container">
+
         <div class="breadcrumb">
-
-              <a href="index.php">Home</a>
-
-               <span>/</span>
-
-             <span>Resources</span>
-
-</div>
+            <a href="index.php">Home</a>
+            <span>/</span>
+            <span>Resources</span>
+        </div>
 
         <h1>Mobile Home Resources</h1>
 
@@ -28,136 +31,77 @@ include 'includes/header.php';
     </div>
 
 </section>
+
 <section class="resources-filter">
 
     <div class="container">
 
         <div class="search-box">
-
             <input
                 type="text"
                 placeholder="Search articles..."
             >
-
         </div>
 
     </div>
+
     <div class="category-filter">
 
-           <button class="category-btn active">All</button>
-
-         <button class="category-btn">Selling</button>
-
-         <button class="category-btn">Buying</button>
-
-         <button class="category-btn">Financing</button>
-
+        <button class="category-btn active">All</button>
+        <button class="category-btn">Selling</button>
+        <button class="category-btn">Buying</button>
+        <button class="category-btn">Financing</button>
         <button class="category-btn">Mobile Home Tips</button>
 
-   </div>
+    </div>
 
 </section>
+
 <section class="resource-library">
 
     <div class="container">
 
         <div class="library-grid">
 
-            <!-- Card 1 -->
+            <?php if (!empty($articles)): ?>
 
-            <article class="library-card">
+                <?php foreach ($articles as $article): ?>
 
-                <div class="library-image">
+                    <article class="library-card">
 
-                    <img src="images/blog1.jpeg" alt="Article">
+                        <div class="library-image">
 
-                    <span class="library-category">Selling</span>
+                            <img
+                                src="<?= htmlspecialchars($article['featured_image']); ?>"
+                                alt="<?= htmlspecialchars($article['title']); ?>">
 
-                </div>
+                            <span class="library-category">
+                                <?= htmlspecialchars($article['category']); ?>
+                            </span>
 
-                <div class="library-content">
+                        </div>
 
-                    <h3>How to Sell Your Mobile Home Fast</h3>
+                        <div class="library-content">
 
-                    <p>Learn the easiest ways to sell your mobile home quickly without unnecessary delays or hidden fees.</p>
+                            <h3><?= htmlspecialchars($article['title']); ?></h3>
 
-                    <a href="article.php" class="library-link">Read More →</a>
+                            <p><?= htmlspecialchars($article['excerpt']); ?></p>
 
-                </div>
+                            <a href="article.php?slug=<?= urlencode($article['slug']); ?>" class="library-link">
+                                Read More →
+                            </a>
 
-            </article>
+                        </div>
 
-            <!-- Card 2 -->
+                    </article>
 
-            <article class="library-card">
+                <?php endforeach; ?>
 
-                <div class="library-image">
+            <?php else: ?>
 
-                    <img src="images/blog2.jpeg" alt="Article">
+                <p>No articles found.</p>
 
-                    <span class="library-category blue">Buying</span>
-
-                </div>
-
-                <div class="library-content">
-
-                    <h3>What to Look for Before Buying</h3>
-
-                    <p>Discover the key things every buyer should inspect before purchasing a manufactured home.</p>
-
-                    <a href="article.php" class="library-link">Read More →</a>
-
-                </div>
-
-            </article>
-
-            <!-- Card 3 -->
-
-            <article class="library-card">
-
-                <div class="library-image">
-
-                    <img src="images/blog3.jpeg" alt="Article">
-
-                    <span class="library-category orange">Tips</span>
-
-                </div>
-
-                <div class="library-content">
-
-                    <h3>Increase Your Home's Value</h3>
-
-                    <p>Simple improvements that can make your mobile home more attractive to buyers.</p>
-
-                    <a href="article.php" class="library-link">Read More →</a>
-
-                </div>
-
-            </article>
-
-            <!-- Card 4 -->
-
-            <article class="library-card">
-
-                <div class="library-image">
-
-                    <img src="images/blog1.jpeg" alt="Article">
-
-                    <span class="library-category">Guides</span>
-
-                </div>
-
-                <div class="library-content">
-
-                    <h3>Understanding the Selling Process</h3>
-
-                    <p>A step-by-step guide to selling your mobile home with confidence.</p>
-
-                    <a href="article.php" class="library-link">Read More →</a>
-
-                </div>
-
-            </article>
+            <?php endif; ?>
 
         </div>
 
@@ -165,6 +109,18 @@ include 'includes/header.php';
 
 </section>
 
+<section class="pagination-section">
+
+    <div class="container">
+
+        <div class="pagination">
+
+            <a href="#" class="active">1</a>
+
+        </div>
+
+    </div>
+
+</section>
 
 <?php include 'includes/footer.php'; ?>
-

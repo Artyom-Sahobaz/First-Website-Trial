@@ -290,5 +290,29 @@ if(resourceCards.length){
     resourceObserver.observe(resourceCards[0]);
 
 }
+ const faqItems = document.querySelectorAll(".faq-item");
+
+ faqItems.forEach(item => {
+
+    const question = item.querySelector(".faq-question");
+
+    question.addEventListener("click", () => {
+
+        if (item.classList.contains("active")) {
+
+            item.classList.remove("active");
+
+        } else {
+
+            faqItems.forEach(faq => faq.classList.remove("active"));
+
+            item.classList.add("active");
+
+        }
+
+    });
+
+ });
 
 });
+
