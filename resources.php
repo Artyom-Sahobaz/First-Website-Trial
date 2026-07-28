@@ -75,9 +75,39 @@ include 'includes/header.php';
                                 src="<?= htmlspecialchars($article['featured_image']); ?>"
                                 alt="<?= htmlspecialchars($article['title']); ?>">
 
-                            <span class="library-category">
-                                <?= htmlspecialchars($article['category']); ?>
-                            </span>
+  <?php
+
+$categoryClass = "category-other";
+
+switch($article['category']){
+
+    case "Selling Tips":
+        $categoryClass = "category-selling";
+        break;
+
+    case "Buying":
+        $categoryClass = "category-buying";
+        break;
+
+    case "Guides":
+        $categoryClass = "category-guides";
+        break;
+
+    case "Financing":
+        $categoryClass = "category-financing";
+        break;
+
+    case "Maintenance":
+        $categoryClass = "category-maintenance";
+        break;
+}
+
+?>
+
+<span class="library-category <?= $categoryClass; ?>">
+    <?= htmlspecialchars($article['category']); ?>
+</span>
+                            
 
                         </div>
 

@@ -1686,17 +1686,6 @@ grid-template-columns:1fr;
 
 }
 
-.resource-category.blue{
-
-    background:#3B82F6;
-
-}
-
-.resource-category.orange{
-
-    background:#F59E0B;
-
-}
 
 /* Content */
 
@@ -2622,8 +2611,6 @@ Responsive
 
     left:16px;
 
-    background:#5DBB7B;
-
     color:#ffffff;
 
     padding:8px 16px;
@@ -2818,19 +2805,17 @@ Responsive
 
     display:inline-block;
 
-    background:#5DBB7B;
+    margin-top:25px;
+    margin-bottom:20px;
 
-    color:#fff;
+    color:#ffffff;
 
-    padding:8px 18px;
+    padding:10px 22px;
 
     border-radius:999px;
 
-    font-size:13px;
-
+    font-size:14px;
     font-weight:700;
-
-    margin-bottom:20px;
 
 }
 
@@ -2910,23 +2895,6 @@ Responsive
 
 }
 
-.article-category{
-
-    display:inline-block;
-    margin-top:25px;
-    margin-bottom:20px;
-
-    background:#5DBB7B;
-    color:#ffffff;
-
-    padding:10px 22px;
-
-    border-radius:999px;
-
-    font-size:14px;
-    font-weight:700;
-
-}
 
 .article-hero h1{
 
@@ -3271,4 +3239,31 @@ Responsive
 .admin-btn:hover {
     background: #25673a;
     color: #ffffff !important;
+}
+/* ==========================================
+   CATEGORY COLORS
+========================================== */
+
+.category-selling{
+    background:#2E7D32;
+}
+
+.category-buying{
+    background:#1565C0;
+}
+
+.category-guides{
+    background:#8E24AA;
+}
+
+.category-financing{
+    background:#EF6C00;
+}
+
+.category-maintenance{
+    background:#C62828;
+}
+
+.category-other{
+    background:#616161;
 }
