@@ -9,7 +9,33 @@ if (!isset($_SESSION['admin'])) {
 require_once '../includes/config.php';
 
 // Fetch all articles
-$stmt = $pdo->query("SELECT * FROM articles ORDER BY created_at DESC");
+// Search
+$search = $_GET['search'] ?? '';
+
+if ($search != '') {
+
+    $stmt = $pdo->prepare("
+        SELECT *
+        FROM articles
+        WHERE title LIKE ?
+           OR category LIKE ?
+           OR status LIKE ?
+        ORDER BY created_at DESC
+    ");
+
+    $keyword = "%{$search}%";
+    $stmt->execute([$keyword, $keyword, $keyword]);
+
+} else {
+
+    $stmt = $pdo->query("
+        SELECT *
+        FROM articles
+        ORDER BY created_at DESC
+    ");
+
+}
+
 $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -152,6 +178,39 @@ color:red;
 </a>
 
 </div>
+<form method="GET" style="margin-bottom:25px; display:flex; gap:10px;">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search by title, category or status..."
+        value="<?= htmlspecialchars($search); ?>"
+        style="
+            flex:1;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+            font-size:15px;
+        ">
+
+    <button
+        type="submit"
+        class="btn"
+        style="border:none; cursor:pointer;">
+        🔍 Search
+    </button>
+
+    <?php if($search != ''): ?>
+
+        <a href="articles.php"
+           class="btn"
+           style="background:#666;">
+           Clear
+        </a>
+
+    <?php endif; ?>
+
+</form>
 
 <table>
 
@@ -170,6 +229,8 @@ color:red;
 </tr>
 
 </tr>
+
+<?php if(count($articles) > 0): ?>
 
 <?php foreach($articles as $article): ?>
 
@@ -260,6 +321,19 @@ onclick="return confirm('Delete this article?');">
 </tr>
 
 <?php endforeach; ?>
+<?php else: ?>
+
+<tr>
+
+<td colspan="7" style="text-align:center;padding:40px;">
+
+No articles found.
+
+</td>
+
+</tr>
+
+<?php endif; ?>
 
 </table>
 

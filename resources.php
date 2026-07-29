@@ -1,11 +1,57 @@
 <?php
 
 $pageTitle = "Resources";
+$metaDescription = "Browse expert guides, buying tips, selling advice, financing information, and maintenance resources for mobile homes.";
+
+$metaKeywords = "mobile home guides, buying, selling, financing";
+
+$canonicalUrl = "https://cash4mobilehomes.com/resources.php";
+
+$metaImage = "https://cash4mobilehomes.com/images/logo.png";
 
 require_once 'includes/config.php';
 
 // Fetch all published articles
-$stmt = $pdo->query("SELECT * FROM articles WHERE status='Published' ORDER BY created_at DESC");
+// Pagination
+$articlesPerPage = 9;
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+if ($page < 1) {
+    $page = 1;
+}
+
+// Count total published articles
+$totalStmt = $pdo->query("
+    SELECT COUNT(*)
+    FROM articles
+    WHERE status='Published'
+");
+
+$totalArticles = $totalStmt->fetchColumn();
+
+$totalPages = ceil($totalArticles / $articlesPerPage);
+
+if ($page > $totalPages && $totalPages > 0) {
+    $page = $totalPages;
+}
+
+$offset = ($page - 1) * $articlesPerPage;
+
+// Load only the current page
+$stmt = $pdo->prepare("
+    SELECT *
+    FROM articles
+    WHERE status='Published'
+    ORDER BY created_at DESC
+    LIMIT :limit OFFSET :offset
+");
+
+$stmt->bindValue(':limit', $articlesPerPage, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+
+$stmt->execute();
+
 $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 include 'includes/header.php';
@@ -138,6 +184,7 @@ switch($article['category']){
     </div>
 
 </section>
+<?php if($totalPages > 1): ?>
 
 <section class="pagination-section">
 
@@ -145,12 +192,61 @@ switch($article['category']){
 
         <div class="pagination">
 
-            <a href="#" class="active">1</a>
+            <?php if($page > 1): ?>
+
+                <a href="?page=<?= $page-1; ?>">&laquo;</a>
+
+            <?php endif; ?>
+
+            <?php
+
+            $start = max(1, $page - 2);
+            $end   = min($totalPages, $page + 2);
+
+            if($start > 1){
+                echo '<a href="?page=1">1</a>';
+
+                if($start > 2){
+                    echo '<span>...</span>';
+                }
+            }
+
+            for($i = $start; $i <= $end; $i++): ?>
+
+                <a
+                    href="?page=<?= $i; ?>"
+                    class="<?= $i == $page ? 'active' : ''; ?>">
+
+                    <?= $i; ?>
+
+                </a>
+
+            <?php endfor;
+
+            if($end < $totalPages){
+
+                if($end < $totalPages-1){
+                    echo '<span>...</span>';
+                }
+
+                echo '<a href="?page='.$totalPages.'">'.$totalPages.'</a>';
+
+            }
+
+            ?>
+
+            <?php if($page < $totalPages): ?>
+
+                <a href="?page=<?= $page+1; ?>">&raquo;</a>
+
+            <?php endif; ?>
 
         </div>
 
     </div>
 
 </section>
+
+<?php endif; ?>
 
 <?php include 'includes/footer.php'; ?>

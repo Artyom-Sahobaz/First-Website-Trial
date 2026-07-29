@@ -16,8 +16,80 @@ $article = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$article) {
     die("Article not found.");
 }
+// Get 3 related articles from the same category
+$stmt = $pdo->prepare("
+    SELECT *
+    FROM articles
+    WHERE category = ?
+      AND status = 'Published'
+      AND id != ?
+    ORDER BY created_at DESC
+    LIMIT 3
+");
 
+$stmt->execute([
+    $article['category'],
+    $article['id']
+]);
+
+$relatedArticles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// If there are fewer than 3, get the latest published articles
+if(count($relatedArticles) < 3){
+
+    $stmt = $pdo->prepare("
+        SELECT *
+        FROM articles
+        WHERE status='Published'
+          AND id != ?
+        ORDER BY created_at DESC
+        LIMIT 3
+    ");
+
+    $stmt->execute([$article['id']]);
+
+    $relatedArticles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 $pageTitle = $article['meta_title'];
+$pageTitle = $article['meta_title'];
+
+$metaDescription = $article['meta_description'];
+
+$metaKeywords = $article['meta_keywords'];
+
+$canonicalUrl = "https://cash4mobilehomes.com/article.php?slug=" . urlencode($article['slug']);
+
+$metaImage = "https://cash4mobilehomes.com/" . ltrim($article['featured_image'], "/");
+
+$schemaData = [
+
+    "@context" => "https://schema.org",
+
+    "@type" => "Article",
+
+    "headline" => $article['title'],
+
+    "description" => $article['meta_description'],
+
+    "image" => [
+        $metaImage
+    ],
+
+    "datePublished" => $article['created_at'],
+
+    "author" => [
+        "@type" => "Organization",
+        "name" => "Cash4MobileHomes"
+    ],
+
+    "publisher" => [
+        "@type" => "Organization",
+        "name" => "Cash4MobileHomes"
+    ],
+
+    "mainEntityOfPage" => $canonicalUrl
+
+];
 
 include 'includes/header.php';
 
@@ -210,52 +282,63 @@ switch($article['category']){
             <p>Explore more helpful resources for mobile homeowners.</p>
 
         </div>
+<div class="related-grid">
 
-        <div class="related-grid">
+<?php foreach($relatedArticles as $related): ?>
 
-            <a href="article.php" class="related-card">
+<?php
 
-                <img src="images/blog1.jpeg" alt="">
+$badge = "category-other";
 
-                <div class="related-content">
+switch($related['category']){
 
-                    <span>Selling Tips</span>
+    case "Selling Tips":
+        $badge = "category-selling";
+        break;
 
-                    <h3>How to Sell a Mobile Home Fast</h3>
+    case "Buying":
+        $badge = "category-buying";
+        break;
 
-                </div>
+    case "Guides":
+        $badge = "category-guides";
+        break;
 
-            </a>
+    case "Financing":
+        $badge = "category-financing";
+        break;
 
-            <a href="article.php" class="related-card">
+    case "Maintenance":
+        $badge = "category-maintenance";
+        break;
+}
 
-                <img src="images/blog3.jpeg" alt="">
+?>
 
-                <div class="related-content">
+<a href="article.php?slug=<?= urlencode($related['slug']); ?>" class="related-card">
 
-                    <span>Guides</span>
+    <img
+        src="<?= htmlspecialchars($related['featured_image']); ?>"
+        alt="<?= htmlspecialchars($related['title']); ?>">
 
-                    <h3>What Paperwork Do You Need?</h3>
+    <div class="related-content">
 
-                </div>
+        <span class="category-badge <?= $badge; ?>">
+    <?= htmlspecialchars($related['category']); ?>
+</span>
 
-            </a>
+        <h3>
+            <?= htmlspecialchars($related['title']); ?>
+        </h3>
 
-            <a href="article.php" class="related-card">
+    </div>
 
-                <img src="images/blog2.jpeg" alt="">
+</a>
 
-                <div class="related-content">
+<?php endforeach; ?>
 
-                    <span>Buying</span>
-
-                    <h3>Can You Sell Without a Title?</h3>
-
-                </div>
-
-            </a>
-
-        </div>
+</div>
+        
 
     </div>
 

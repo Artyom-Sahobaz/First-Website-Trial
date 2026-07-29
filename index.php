@@ -1,6 +1,28 @@
 <?php
+
+require_once 'includes/config.php';
+
 $pageTitle = "Cash4MobileHomes";
+$metaDescription = "Sell your mobile home fast with a fair cash offer or browse quality mobile homes for sale nationwide.";
+
+$metaKeywords = "mobile homes, sell mobile home, buy mobile home, cash offer";
+
+$canonicalUrl = "https://cash4mobilehomes.com/";
+
+$metaImage = "https://cash4mobilehomes.com/images/logo.png";
+
+$stmt = $pdo->query("
+SELECT *
+FROM articles
+WHERE status='Published'
+ORDER BY created_at DESC
+LIMIT 3
+");
+
+$latestArticles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 include 'includes/header.php';
+
 ?>
 
     
@@ -529,115 +551,76 @@ include 'includes/header.php';
 
         <div class="resources-grid">
 
-            <!-- Article 1 -->
+<?php foreach($latestArticles as $article): ?>
 
-            <article class="resource-card">
+<?php
 
-                <div class="resource-image">
+$badge = "category-other";
 
-                    <img src="images/blog1.jpeg"
-                         alt="Selling Mobile Home">
+switch($article['category']){
 
-                    <span class="resource-category">
-                        Selling Tips
-                    </span>
+    case "Selling Tips":
+        $badge = "category-selling";
+        break;
 
-                </div>
+    case "Buying":
+        $badge = "category-buying";
+        break;
 
-                <div class="resource-content">
+    case "Guides":
+        $badge = "category-guides";
+        break;
 
-                    <h3>
-                        How to Sell Your Mobile Home Faster
-                    </h3>
+    case "Financing":
+        $badge = "category-financing";
+        break;
 
-                    <p>
-                        Learn simple strategies that can help prepare your
-                        mobile home and attract serious buyers.
-                    </p>
+    case "Maintenance":
+        $badge = "category-maintenance";
+        break;
+}
 
-                    <a href="resources.html" class="resource-link">
+?>
 
-                        Read Article →
+<article class="resource-card">
 
-                    </a>
+    <div class="resource-image">
 
-                </div>
+        <img
+            src="<?= htmlspecialchars($article['featured_image']); ?>"
+            alt="<?= htmlspecialchars($article['title']); ?>">
 
-            </article>
+        <span class="resource-category <?= $badge; ?>">
+            <?= htmlspecialchars($article['category']); ?>
+        </span>
 
-            <!-- Article 2 -->
+    </div>
 
-            <article class="resource-card">
+    <div class="resource-content">
 
-                <div class="resource-image">
+        <h3>
+            <?= htmlspecialchars($article['title']); ?>
+        </h3>
 
-                    <img src="images/blog2.jpeg"
-                         alt="Buying Mobile Home">
+        <p>
+            <?= htmlspecialchars($article['excerpt']); ?>
+        </p>
 
-                    <span class="resource-category blue">
-                        Buying Guide
-                    </span>
+        <a
+            href="article.php?slug=<?= urlencode($article['slug']); ?>"
+            class="resource-link">
 
-                </div>
+            Read Article →
 
-                <div class="resource-content">
+        </a>
 
-                    <h3>
-                        A First-Time Buyer's Guide
-                    </h3>
+    </div>
 
-                    <p>
-                        Everything you should know before purchasing your
-                        first mobile home.
-                    </p>
+</article>
 
-                    <a href="resources.html" class="resource-link">
+<?php endforeach; ?>
 
-                        Read Article →
-
-                    </a>
-
-                </div>
-
-            </article>
-
-            <!-- Article 3 -->
-
-            <article class="resource-card">
-
-                <div class="resource-image">
-
-                    <img src="images/blog3.jpeg"
-                         alt="Maintenance">
-
-                    <span class="resource-category orange">
-                        Maintenance
-                    </span>
-
-                </div>
-
-                <div class="resource-content">
-
-                    <h3>
-                        7 Ways to Maintain Your Mobile Home
-                    </h3>
-
-                    <p>
-                        Practical maintenance tips to protect your investment
-                        and extend the life of your home.
-                    </p>
-
-                    <a href="resources.html" class="resource-link">
-
-                        Read Article →
-
-                    </a>
-
-                </div>
-
-            </article>
-
-        </div>
+</div>
 
         <div class="resources-button">
 

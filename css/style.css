@@ -3087,7 +3087,7 @@ Responsive
 
 }
 
-.related-content span{
+.related-content > span:not(.category-badge){
 
     color:#16a34a;
     font-size:14px;
@@ -3095,6 +3095,7 @@ Responsive
     text-transform:uppercase;
 
 }
+
 
 .related-content h3{
 
@@ -3266,4 +3267,40 @@ Responsive
 
 .category-other{
     background:#616161;
+}
+/* ==========================================
+   CATEGORY BADGES
+========================================== */
+
+.category-badge{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:700;
+    color:#ffffff !important;
+    text-transform:uppercase;
+    line-height:1;
+}
+
+.related-content .article-category{
+    margin:0 0 15px 0;
+    color:#ffffff !important;
+}
+.pagination span{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:46px;
+
+    height:46px;
+
+    color:#64748B;
+
+    font-weight:600;
+
 }
