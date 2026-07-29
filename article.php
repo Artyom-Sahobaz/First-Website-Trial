@@ -55,7 +55,7 @@ $pageTitle = $article['meta_title'];
 
 $metaDescription = $article['meta_description'];
 
-$metaKeywords = $article['meta_keywords'];
+$metaKeywords = $article['meta_keywords'] ?? "";
 
 $canonicalUrl = "https://cash4mobilehomes.com/article.php?slug=" . urlencode($article['slug']);
 

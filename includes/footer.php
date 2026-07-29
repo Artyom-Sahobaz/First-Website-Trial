@@ -106,7 +106,28 @@
 
 </footer>
 
+<div id="sellerSuccessModal" class="success-modal">
+
+    <div class="success-box">
+
+        <button id="closeSellerModal" class="modal-close" aria-label="Close">
+            &times;
+        </button>
+
+        <h3>Thank you for your request</h3>
+
+        <p>
+            We have received your information and will get in touch with you shortly.
+        </p>
+
+    </div>
+
+</div>
+
 <script src="js/script.js"></script>
+
+
+
 
 </body>
 </html>

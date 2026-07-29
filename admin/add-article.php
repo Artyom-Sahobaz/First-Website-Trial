@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = $_POST['content'];
     $meta_title = $_POST['meta_title'];
     $meta_description = $_POST['meta_description'];
+    $meta_keywords = $_POST['meta_keywords'];
     $status = $_POST['status'];
 
     $featured_image = "";
@@ -33,9 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stmt = $pdo->prepare("
         INSERT INTO articles
-        (title, slug, category, excerpt, content, featured_image, meta_title, meta_description, status)
-        VALUES
-        (?, ?, ?, ?, ?, ?, ?, ?, ?)
+(title, slug, category, excerpt, content, featured_image, meta_title, meta_description, meta_keywords, status)
+VALUES
+(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
 
     $stmt->execute([
@@ -47,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $featured_image,
         $meta_title,
         $meta_description,
+        $meta_keywords,
         $status
     ]);
 
@@ -189,6 +191,16 @@ background:#25673a;
 <div class="form-group">
 <label>SEO Description</label>
 <textarea name="meta_description" style="min-height:120px;"></textarea>
+</div>
+<div class="form-group">
+
+<label>SEO Keywords</label>
+
+<input
+type="text"
+name="meta_keywords"
+value="<?= htmlspecialchars($article['meta_keywords']); ?>">
+
 </div>
 
 <div class="form-group">

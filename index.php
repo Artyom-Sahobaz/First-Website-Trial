@@ -329,28 +329,75 @@ include 'includes/header.php';
                 </div>
 
             </div>
+            
 
-            <form class="seller-form">
+            <form
+id="sellerForm"
+class="seller-form">
 
-                <input type="text" placeholder="Full Name" required>
+                <input
+type="text"
+name="full_name"
+placeholder="Full Name"
+required>
 
-                <input type="email" placeholder="Email Address" required>
+                <input
+type="email"
+name="email"
+placeholder="Email Address"
+required>
 
-                <input type="tel" placeholder="Phone Number" required>
+                <input
+type="tel"
+name="phone"
+placeholder="Phone Number"
+required>
 
-                <input type="text" placeholder="City">
+                <input
+type="text"
+name="city"
+placeholder="City">
 
-                <input type="text" placeholder="State">
+<input
+type="text"
+name="property_address"
+placeholder="Property Address"
+required>
 
-                <input type="text" placeholder="Mobile Home Make">
+                <input
+type="text"
+name="state"
+placeholder="State">
 
-                <input type="text" placeholder="Asking Price">
+<input
+type="text"
+name="zip_code"
+placeholder="ZIP Code"
+required>
 
-                <textarea placeholder="Tell us about your mobile home..." rows="5"></textarea>
+                <input
+type="text"
+name="home_type"
+placeholder="Mobile Home Make">
 
-                <button class="submit-btn">
-                    Get My Cash Offer
-                </button>
+                <input
+type="text"
+name="asking_price"
+placeholder="Asking Price">
+
+                <textarea
+name="message"
+placeholder="Tell us about your mobile home..."
+rows="5"></textarea>
+
+                <button
+id="submitSeller"
+type="submit"
+class="submit-btn">
+
+    Get My Cash Offer
+
+</button>
 
             </form>
 
@@ -392,28 +439,60 @@ include 'includes/header.php';
             <!-- LEFT -->
             <div class="buyer-form">
 
-                <h3>Tell Us What You're Looking For</h3>
+    <h3>Tell Us What You're Looking For</h3>
 
-                <input type="text" placeholder="Full Name" required>
+    <form id="buyerForm">
 
-                <input type="email" placeholder="Email Address" required>
+        <input
+            type="text"
+            name="full_name"
+            placeholder="Full Name"
+            required>
 
-                <input type="tel" placeholder="Phone Number" required>
+        <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            required>
 
-                <input type="text" placeholder="Preferred State">
+        <input
+            type="tel"
+            name="phone"
+            placeholder="Phone Number"
+            required>
 
-                <input type="text" placeholder="Budget">
+        <input
+            type="text"
+            name="preferred_state"
+            placeholder="Preferred State">
 
-                <input type="text" placeholder="Bedrooms">
+        <input
+            type="text"
+            name="budget"
+            placeholder="Budget">
 
-                <textarea rows="5"
-                    placeholder="Tell us what kind of mobile home you're looking for..."></textarea>
+        <input
+            type="text"
+            name="bedrooms"
+            placeholder="Bedrooms">
 
-                <button class="buyer-submit">
-                    Send My Request
-                </button>
+        <textarea
+            name="message"
+            rows="5"
+            placeholder="Tell us what kind of mobile home you're looking for..."></textarea>
 
-            </div>
+        <button
+            type="submit"
+            id="buyerSubmit"
+            class="buyer-submit">
+
+            Send My Request
+
+        </button>
+
+    </form>
+
+</div>
 
             <!-- RIGHT -->
             <div class="buyer-image">

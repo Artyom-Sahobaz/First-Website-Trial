@@ -315,4 +315,179 @@ if(resourceCards.length){
  });
 
 });
+const sellerForm = document.getElementById("sellerForm");
 
+if(sellerForm){
+
+    sellerForm.addEventListener("submit", function(e){
+
+        e.preventDefault();
+
+        const button = document.getElementById("submitSeller");
+
+        button.disabled = true;
+        button.innerHTML = "Submitting...";
+
+        const formData = new FormData(sellerForm);
+
+        fetch("submit-seller.php",{
+
+            method:"POST",
+
+            body:formData
+
+        })
+
+        .then(response => response.json())
+
+        .then(data=>{
+
+    button.disabled = false;
+    button.innerHTML = "Get My Cash Offer";
+
+    if(data.success){
+
+       sellerForm.reset();
+
+const modal = document.getElementById("sellerSuccessModal");
+
+modal.style.display = "flex";
+document.body.style.overflow = "hidden";
+
+setTimeout(function () {
+
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+
+}, 4000);
+
+    }else{
+
+        alert(data.message);
+
+    }
+
+})
+        .catch(error=>{
+
+            button.disabled = false;
+            button.innerHTML = "Get My Cash Offer";
+
+            alert("Something went wrong. Please try again.");
+
+            console.error(error);
+
+        });
+
+    });
+
+}
+
+document.addEventListener("click", function (e) {
+
+    if (e.target.id === "closeSellerModal") {
+
+        const modal = document.getElementById("sellerSuccessModal");
+
+modal.style.display = "none";
+document.body.style.overflow = "";
+
+    }
+
+});
+document.addEventListener("click", function (e) {
+
+    const modal = document.getElementById("sellerSuccessModal");
+
+    if (!modal) return;
+
+    // Close only when clicking the dark background
+    if (e.target === modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+    }
+
+});
+document.addEventListener("keydown", function (e) {
+
+    if (e.key === "Escape") {
+
+        const modal = document.getElementById("sellerSuccessModal");
+
+modal.style.display = "none";
+
+document.body.style.overflow = "";
+
+    }
+
+});
+
+// ===============================
+// BUYER FORM AJAX
+// ===============================
+
+const buyerForm = document.getElementById("buyerForm");
+
+if (buyerForm) {
+
+    buyerForm.addEventListener("submit", function (e) {
+
+        e.preventDefault();
+
+        const button = document.getElementById("buyerSubmit");
+
+        button.disabled = true;
+        button.innerHTML = "Submitting...";
+
+        const formData = new FormData(buyerForm);
+
+        fetch("submit-buyer.php", {
+            method: "POST",
+            body: formData
+        })
+
+        .then(response => response.json())
+
+        .then(data => {
+
+            button.disabled = false;
+            button.innerHTML = "Send My Request";
+
+            if (data.success) {
+
+                buyerForm.reset();
+
+                const modal = document.getElementById("sellerSuccessModal");
+
+                modal.style.display = "flex";
+                document.body.style.overflow = "hidden";
+
+                setTimeout(function () {
+
+                    modal.style.display = "none";
+                    document.body.style.overflow = "";
+
+                }, 4000);
+
+            } else {
+
+                alert(data.message);
+
+            }
+
+        })
+
+        .catch(error => {
+
+            button.disabled = false;
+            button.innerHTML = "Send My Request";
+
+            alert("Something went wrong. Please try again.");
+
+            console.error(error);
+
+        });
+
+    });
+
+}

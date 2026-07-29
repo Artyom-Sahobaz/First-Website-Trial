@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = $_POST['content'];
     $meta_title = $_POST['meta_title'];
     $meta_description = $_POST['meta_description'];
+    $meta_keywords = $_POST['meta_keywords'];
     $status = $_POST['status'];
 
     // Keep the existing image by default
@@ -59,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             featured_image = ?,
             meta_title = ?,
             meta_description = ?,
+            meta_keywords = ?,
             status = ?
         WHERE id = ?
     ");
@@ -72,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $featured_image,
         $meta_title,
         $meta_description,
+        $meta_keywords,
         $status,
         $id
     ]);
@@ -263,6 +266,16 @@ value="<?= htmlspecialchars($article['meta_title']); ?>">
 <label>SEO Description</label>
 
 <textarea name="meta_description" style="min-height:120px;"><?= htmlspecialchars($article['meta_description']); ?></textarea>
+
+</div>
+<div class="form-group">
+
+<label>SEO Keywords</label>
+
+<input
+type="text"
+name="meta_keywords"
+value="<?= htmlspecialchars($article['meta_keywords'] ?? ''); ?>">
 
 </div>
 
