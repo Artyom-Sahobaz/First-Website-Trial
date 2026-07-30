@@ -7,6 +7,7 @@ if (!isset($_SESSION['admin'])) {
 }
 
 require_once("../includes/config.php");
+echo "<!-- Dashboard Updated -->";
 
 /*=========================================
   Dashboard Statistics
@@ -22,6 +23,11 @@ $sellerCount = $pdo->query("
 $buyerCount = $pdo->query("
     SELECT COUNT(*) 
     FROM buyer_leads
+")->fetchColumn();
+// Contact Messages
+$contactMessages = $pdo->query("
+    SELECT COUNT(*)
+    FROM contact_messages
 ")->fetchColumn();
 
 // Total Articles
@@ -102,7 +108,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
             <div class="topbar-right">
 
-            
+                
 
                 <div class="user-profile">
 
@@ -203,6 +209,34 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                         </div>
 
                     </div>
+                    <!-- Contact Messages -->
+
+<div class="card blue clickable-card"
+     onclick="window.location='contact-messages.php'">
+
+    <div class="card-icon">
+
+        <i class="fa-solid fa-envelope"></i>
+
+    </div>
+
+    <h2><?= $contactMessages ?></h2>
+
+    <p>Contact Messages</p>
+
+    <div class="card-footer">
+
+        <span>
+
+            <i class="fa-solid fa-envelope-open-text"></i>
+
+            Website Enquiries
+
+        </span>
+
+    </div>
+
+</div>
 
                     <!-- Total Articles -->
 
@@ -402,6 +436,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                                 <td><?= $buyerCount ?></td>
 
                             </tr>
+                            <tr>
+
+    <td><strong>Contact Messages</strong></td>
+
+    <td><?= $contactMessages ?></td>
+
+</tr>
 
                             <tr>
 
@@ -583,6 +624,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                                 <td><?= $buyerCount ?></td>
 
                             </tr>
+                            <tr>
+
+    <td>
+        <i class="fa-solid fa-envelope"
+           style="color:#5AAE8C;"></i>
+
+        Contact Messages
+
+    </td>
+
+    <td><?= $contactMessages ?></td>
+
+</tr>
 
                             <tr>
 

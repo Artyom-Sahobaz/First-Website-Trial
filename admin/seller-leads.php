@@ -441,6 +441,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                     ?>
 
                     <tr
+                        
+                        data-read="<?= $lead['is_read'] ?>"
                         data-status="<?= htmlspecialchars($lead['status']) ?>"
                         data-search="<?= strtolower(htmlspecialchars(
                             $lead['first_name']." ".

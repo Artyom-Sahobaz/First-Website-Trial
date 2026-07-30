@@ -37,11 +37,55 @@ document.querySelectorAll(".openBuyerBtn").forEach(button => {
 
         })
 
-        .then(html => {
+.then(html => {
 
-            drawerContent.innerHTML = html;
+    drawerContent.innerHTML = html;
 
-        })
+    const row = button.closest("tr");
+
+    if (row) {
+
+        const leadCell = row.cells[0];
+
+        const wasUnread = row.querySelector(".badge.info") !== null;
+
+if (wasUnread) {
+
+    leadCell.innerHTML = `
+        <span class="badge">
+            Viewed
+        </span>
+    `;
+
+    const badge = document.getElementById("buyerLeadBadge");
+
+    if (badge) {
+
+        let count = parseInt(badge.textContent, 10);
+
+        if (!isNaN(count)) {
+
+            count--;
+
+            if (count <= 0) {
+
+                badge.remove();
+
+            } else {
+
+                badge.textContent = count;
+
+            }
+
+        }
+
+    }
+
+}
+
+    }
+
+})
 
         .catch(error => {
 
@@ -407,29 +451,27 @@ saveStatusBtn.addEventListener("click", function () {
     })
 
     .then(response => response.text())
+.then(result => {
 
-    .then(result => {
+    if (result.trim() === "success") {
 
-        if (result.trim() === "success") {
+        statusPopover.style.display = "none";
 
-            statusPopover.style.display = "none";
+        location.reload();
 
-            location.reload();
+    } else {
 
-        } else {
+        alert(result);
 
-            alert(result);
+    }
 
-        }
+})
 
-    })
+.catch(error => {
 
-    .catch(error => {
+    console.error(error);
 
-        console.error(error);
-
-        alert("Unable to update status.");
-
-    });
+    alert("Unable to update status.");
 
 });
+}); 

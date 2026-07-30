@@ -1,15 +1,46 @@
-<aside class="sidebar">
+<?php
 
-    <div class="logo">
+$currentPage = basename($_SERVER['PHP_SELF']);
+
+$sellerUnread = $pdo->query("
+    SELECT COUNT(*)
+    FROM seller_leads
+    WHERE is_read = 0
+")->fetchColumn();
+
+$buyerUnread = $pdo->query("
+    SELECT COUNT(*)
+    FROM buyer_leads
+    WHERE is_read = 0
+")->fetchColumn();
+
+$contactUnread = $pdo->query("
+    SELECT COUNT(*)
+    FROM contact_messages
+    WHERE is_read = 0
+")->fetchColumn();
+
+?>
+<aside class="sidebar">
+    
+
+   <div class="logo">
+
+    <a href="dashboard.php" class="brand">
 
         <i class="fa-solid fa-house"></i>
 
-        <div>
+        <div class="brand-text">
+
             <h2>Cash4MobileHomes</h2>
-            <span>Admin Panel</span>
+
+            <span>ADMIN PANEL</span>
+
         </div>
 
-    </div>
+    </a>
+
+</div>
 
     <nav>
 
@@ -27,36 +58,78 @@
             </li>
 
             <li>
-                <a href="seller-leads.php"
-                   class="<?= basename($_SERVER['PHP_SELF']) == 'seller-leads.php' ? 'active' : ''; ?>">
 
-                    <i class="fa-solid fa-house"></i>
+    <a href="seller-leads.php"
+       class="<?= $currentPage == 'seller-leads.php' ? 'active' : ''; ?>">
 
-                    <span>Seller Leads</span>
+        <i class="fa-solid fa-house"></i>
 
-                </a>
-            </li>
+        <span>Seller Leads</span>
+
+        <?php if($sellerUnread > 0): ?>
+
+    <span
+        id="sellerLeadBadge"
+        class="menu-badge">
+
+        <?= $sellerUnread ?>
+
+    </span>
+
+<?php endif; ?>
+
+    </a>
+
+</li>
 
             <li>
+
     <a href="buyer-leads.php"
-       class="<?= basename($_SERVER['PHP_SELF']) == 'buyer-leads.php' ? 'active' : ''; ?>">
+       class="<?= $currentPage == 'buyer-leads.php' ? 'active' : ''; ?>">
 
         <i class="fa-solid fa-users"></i>
 
         <span>Buyer Leads</span>
 
+        <?php if($buyerUnread > 0): ?>
+
+            <span
+    id="buyerLeadBadge"
+    class="menu-badge">
+
+    <?= $buyerUnread ?>
+
+</span>
+
+        <?php endif; ?>
+
     </a>
+
 </li>
 
 <li>
+
     <a href="contact-messages.php"
-       class="<?= basename($_SERVER['PHP_SELF']) == 'contact-messages.php' ? 'active' : ''; ?>">
+       class="<?= $currentPage == 'contact-messages.php' ? 'active' : ''; ?>">
 
         <i class="fa-solid fa-envelope"></i>
 
         <span>Contact Messages</span>
 
+        <?php if($contactUnread > 0): ?>
+
+            <span
+    id="contactBadge"
+    class="menu-badge">
+
+    <?= $contactUnread ?>
+
+</span>
+
+        <?php endif; ?>
+
     </a>
+
 </li>
 
 <li>

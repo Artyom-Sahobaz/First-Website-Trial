@@ -37,11 +37,51 @@ document.querySelectorAll(".openLeadBtn").forEach(button => {
 
         })
 
-        .then(html => {
+.then(html => {
 
-            drawerContent.innerHTML = html;
+    drawerContent.innerHTML = html;
 
-        })
+    const row = button.closest("tr");
+
+    if (!row) return;
+
+    if (row.dataset.read === "0") {
+
+        row.dataset.read = "1";
+
+        row.cells[0].innerHTML = `
+            <span class="badge">
+                Viewed
+            </span>
+        `;
+
+        const badge = document.getElementById("sellerLeadBadge");
+
+        if (badge) {
+
+            let count = parseInt(badge.textContent, 10);
+
+            if (!isNaN(count)) {
+
+                count--;
+
+                if (count <= 0) {
+
+                    badge.remove();
+
+                } else {
+
+                    badge.textContent = count;
+
+                }
+
+            }
+
+        }
+
+    }
+
+})
 
         .catch(error => {
 

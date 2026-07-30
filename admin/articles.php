@@ -45,176 +45,156 @@ $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
 
 <meta charset="UTF-8">
-<title>Manage Articles</title>
 
-<style>
- .badge{
-    display:inline-block;
-    padding:6px 12px;
-    border-radius:20px;
-    font-size:13px;
-    font-weight:600;
-    color:#fff;
-}
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-.badge-selling{
-    background:#2e7d32;
-}
+<title>Articles | Cash4MobileHomes Admin</title>
 
-.badge-buying{
-    background:#1565c0;
-}
+<link
+rel="stylesheet"
+href="css/admin.css">
 
-.badge-guides{
-    background:#7b1fa2;
-}
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
 
-.badge-financing{
-    background:#ef6c00;
-}
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
 
-.badge-maintenance{
-    background:#c62828;
-}
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
 
-.badge-other{
-    background:#616161;
-}   
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#f4f6f9;
-padding:40px;
-}
-
-.header{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:30px;
-
-}
-
-h1{
-font-size:30px;
-}
-
-.btn{
-
-background:#2d7d46;
-color:white;
-padding:12px 20px;
-text-decoration:none;
-border-radius:6px;
-
-}
-
-table{
-
-width:100%;
-border-collapse:collapse;
-background:white;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
-
-}
-
-th,td{
-
-padding:16px;
-border-bottom:1px solid #eee;
-text-align:left;
-
-}
-
-th{
-
-background:#2d7d46;
-color:white;
-
-}
-
-.action{
-
-text-decoration:none;
-margin-right:15px;
-
-}
-
-.edit{
-
-color:#0066cc;
-
-}
-.view{
-color:#2d7d46;
-font-weight:bold;
-}
-
-.delete{
-
-color:red;
-
-}
-
-</style>
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
 <body>
 
-<div class="header">
+<div class="admin-layout">
 
-<h1>Manage Articles</h1>
+<?php include("sidebar.php"); ?>
 
-<a href="add-article.php" class="btn">
-+ Add New Article
+<main class="main-content">
+
+<header class="topbar">
+
+<div>
+
+<h1 class="page-title">
+
+Manage Articles
+
+</h1>
+
+<p>
+
+Manage, edit and publish website articles.
+
+</p>
+
+</div>
+
+<div class="topbar-right">
+
+<a
+href="add-article.php"
+class="btn success">
+
+<i class="fa-solid fa-plus"></i>
+
+Add Article
+
 </a>
 
 </div>
-<form method="GET" style="margin-bottom:25px; display:flex; gap:10px;">
 
-    <input
-        type="text"
-        name="search"
-        placeholder="Search by title, category or status..."
-        value="<?= htmlspecialchars($search); ?>"
-        style="
-            flex:1;
-            padding:12px;
-            border:1px solid #ccc;
-            border-radius:6px;
-            font-size:15px;
-        ">
+</header>
 
-    <button
-        type="submit"
-        class="btn"
-        style="border:none; cursor:pointer;">
-        🔍 Search
-    </button>
 
-    <?php if($search != ''): ?>
+<section class="section">
 
-        <a href="articles.php"
-           class="btn"
-           style="background:#666;">
-           Clear
-        </a>
+<div class="form-card">
 
-    <?php endif; ?>
+<div class="toolbar-header">
+
+<div class="toolbar-title">
+
+<h2>Article Manager</h2>
+
+<p>
+
+Search, edit and manage your website articles.
+
+</p>
+
+</div>
+
+</div>
+
+<form method="GET">
+
+<div class="form-grid" style="margin-top:30px;">
+
+<div class="form-group">
+
+<label>Search Articles</label>
+
+<input
+type="text"
+name="search"
+placeholder="Search by title, category or status..."
+value="<?= htmlspecialchars($search); ?>">
+
+</div>
+
+<div class="form-group" style="display:flex;align-items:flex-end;gap:10px;">
+
+<button
+type="submit"
+class="btn success">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+Search
+
+</button>
+
+<?php if($search != ''): ?>
+
+<a
+href="articles.php"
+class="btn secondary">
+
+Clear
+
+</a>
+
+<?php endif; ?>
+
+</div>
+
+</div>
 
 </form>
 
-<table>
+</div>
 
-<tr>
+</section>
+
+<section class="section">
+
+<div class="table-wrapper">
+
+<table id="articleTable">
+
+<thead>
 
 <tr>
 
@@ -228,7 +208,9 @@ color:red;
 
 </tr>
 
-</tr>
+</thead>
+
+<tbody>
 
 <?php if(count($articles) > 0): ?>
 
@@ -260,61 +242,99 @@ No Image
 
 <?php
 
-$class = "badge-other";
+$categoryClass = 'badge';
 
-switch($article['category']){
+switch ($article['category']) {
 
-    case "Selling Tips":
-        $class = "badge-selling";
+    case 'Selling Tips':
+        $categoryClass .= ' success';
         break;
 
-    case "Buying":
-        $class = "badge-buying";
+    case 'Buying':
+        $categoryClass .= ' info';
         break;
 
-    case "Guides":
-        $class = "badge-guides";
+    case 'Guides':
+        $categoryClass .= ' primary';
         break;
 
-    case "Financing":
-        $class = "badge-financing";
+    case 'Financing':
+        $categoryClass .= ' warning';
         break;
 
-    case "Maintenance":
-        $class = "badge-maintenance";
+    case 'Maintenance':
+        $categoryClass .= ' danger';
+        break;
+
+    default:
+        $categoryClass .= ' secondary';
         break;
 }
 
 ?>
 
-<span class="badge <?= $class; ?>">
-    <?= htmlspecialchars($article['category']); ?>
+<span class="<?= $categoryClass; ?>">
+
+<?= htmlspecialchars($article['category']); ?>
+
 </span>
 
 </td>
 
-<td><?= htmlspecialchars($article['status']); ?></td>
+<td>
+
+<?php
+
+$statusClass = strtolower($article['status']) === 'published'
+    ? 'badge success'
+    : 'badge warning';
+
+?>
+
+<span class="<?= $statusClass; ?>">
+
+<?= htmlspecialchars($article['status']); ?>
+
+</span>
+
+</td>
 
 <td><?= date('M d, Y', strtotime($article['created_at'])); ?></td>
 
 <td>
 
-<a class="action view"
+<div class="action-buttons">
+
+<a
+class="action-btn view"
 href="../article.php?slug=<?= urlencode($article['slug']); ?>"
-target="_blank">
-👁 View
+target="_blank"
+title="View Article">
+
+<i class="fa-solid fa-eye"></i>
+
 </a>
 
-<a class="action edit"
-href="edit-article.php?id=<?= $article['id']; ?>">
-✏ Edit
+<a
+class="action-btn edit"
+href="edit-article.php?id=<?= $article['id']; ?>"
+title="Edit Article">
+
+<i class="fa-solid fa-pen"></i>
+
 </a>
 
-<a class="action delete"
+<a
+class="action-btn delete"
 href="delete-article.php?id=<?= $article['id']; ?>"
-onclick="return confirm('Delete this article?');">
-🗑 Delete
+onclick="return confirm('Delete this article?');"
+title="Delete Article">
+
+<i class="fa-solid fa-trash"></i>
+
 </a>
+
+</div>
 
 </td>
 
@@ -335,7 +355,17 @@ No articles found.
 
 <?php endif; ?>
 
+</tbody>
+
 </table>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
 
 </body>
 

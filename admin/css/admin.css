@@ -136,33 +136,46 @@ select{
 }
 
 .logo{
-
-    margin-bottom:45px;
-
+    padding:0 0 28px;
+    margin-bottom:30px;
 }
 
-.logo h2{
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    width:100%;
+    text-decoration:none;
+}
 
-    font-size:24px;
+.brand i{
+    font-size:26px;
+    color:var(--primary);
+    flex-shrink:0;
+}
 
+.brand-text{
+    min-width:0;
+    flex:1;
+}
+
+.brand-text h2{
+    margin:0;
+    font-size:15px;
     font-weight:700;
-
-    color:var(--primary-dark);
-
-    margin-bottom:4px;
-
+    color:var(--text);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-.logo span{
-
+.brand-text span{
+    display:block;
+    margin-top:2px;
     font-size:11px;
-
     color:var(--muted);
-
-    letter-spacing:2px;
-
+    letter-spacing:1.5px;
     text-transform:uppercase;
-
 }
 
 .sidebar nav{
@@ -2063,5 +2076,50 @@ Quick Status Popover
 .status-popover .btn{
 
     width:100%;
+
+}
+
+/*=========================================
+  Sidebar Notification Badge
+=========================================*/
+
+.sidebar nav ul li a{
+
+    position:relative;
+
+}
+
+.menu-badge{
+
+    position:absolute;
+
+    top:8px;
+
+    right:12px;
+
+    min-width:20px;
+    height:20px;
+
+    padding:0 6px;
+
+    border-radius:999px;
+
+    background:#ef4444;
+
+    color:#fff;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    line-height:1;
+
+    box-shadow:0 2px 8px rgba(239,68,68,.35);
 
 }
