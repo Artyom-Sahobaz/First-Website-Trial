@@ -51,13 +51,49 @@ $notInterestedLeads = $pdo->query("
     Get Seller Leads
 ==================================================*/
 
-$stmt = $pdo->query("
+/*==================================================
+    Pagination
+==================================================*/
+
+$perPage = 25;
+
+$page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+
+/* Total Leads */
+
+$totalRows = $pdo->query("
+    SELECT COUNT(*)
+    FROM seller_leads
+")->fetchColumn();
+
+/* Total Pages */
+
+$totalPages = max(1, ceil($totalRows / $perPage));
+
+/* Offset */
+
+$offset = ($page - 1) * $perPage;
+
+/* Current Page Records */
+
+$stmt = $pdo->prepare("
     SELECT *
     FROM seller_leads
     ORDER BY created_at DESC
+    LIMIT :limit OFFSET :offset
 ");
 
+$stmt->bindValue(":limit", $perPage, PDO::PARAM_INT);
+$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
+
+$stmt->execute();
+
 $leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+/* Showing */
+
+$showingFrom = $totalRows > 0 ? $offset + 1 : 0;
+$showingTo = min($offset + $perPage, $totalRows);
 
 ?>
 
@@ -274,23 +310,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
         <div class="toolbar-header">
 
-            <div>
+            <div class="toolbar-title">
 
-                <h2>
+                <h2>Seller Lead Manager</h2>
 
-                    Seller Lead Manager
-
-                </h2>
-
-                <p style="color:var(--muted);margin-top:5px;">
-
+                <p>
                     Search, filter, review and manage every seller lead from one dashboard.
-
                 </p>
 
             </div>
 
-            <div class="buttons">
+            <div class="toolbar-actions">
 
                 <button
                     type="button"
@@ -318,55 +348,38 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
         </div>
 
-        <div
-            class="form-grid"
-            style="margin-top:30px;">
+        <div class="form-grid" style="margin-top:30px;">
 
-            <div class="form-group">
+    <div class="form-group">
 
-                <label>
+        <label>Search Leads</label>
 
-                    Search Leads
-
-                </label>
-
-                <input
-                    type="text"
-                    id="searchLead"
-                    placeholder="Search by name, email, phone, city or address...">
-
-            </div>
-
-            <div class="form-group">
-
-                <label>
-
-                    Filter Status
-
-                </label>
-
-                <select id="statusFilter">
-
-                    <option value="">All Leads</option>
-
-                    <option value="New">New</option>
-
-                    <option value="Contacted">Contacted</option>
-
-                    <option value="Offer Sent">Offer Sent</option>
-
-                    <option value="Closed">Closed</option>
-
-                    <option value="Not Interested">Not Interested</option>
-
-                </select>
-
-            </div>
-
-        </div>
+        <input
+            type="text"
+            id="searchLead"
+            placeholder="Search by name, email, phone, city or address...">
 
     </div>
 
+    <div class="form-group">
+
+        <label>Filter Status</label>
+
+        <select id="statusFilter">
+
+            <option value="">All Leads</option>
+            <option value="New">New</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Offer Sent">Offer Sent</option>
+            <option value="Closed">Closed</option>
+            <option value="Not Interested">Not Interested</option>
+
+        </select>
+
+    </div>
+
+</div>
+</div>
 </section>
 <!-- ==================================================
      Seller Leads Table
@@ -600,11 +613,76 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
             </tbody>
 
-        </table>
+               </table>
+
+    </div>
+
+    <!-- Pagination -->
+
+    <div class="pagination-wrapper">
+
+        <div class="pagination-info">
+
+            Showing
+
+            <strong><?= $showingFrom ?></strong>
+
+            -
+
+            <strong><?= $showingTo ?></strong>
+
+            of
+
+            <strong><?= $totalRows ?></strong>
+
+            leads
+
+        </div>
+
+        <div class="pagination">
+
+            <?php if($page > 1): ?>
+
+                <a
+                    class="page-btn"
+                    href="?page=<?= $page-1 ?>">
+
+                    <i class="fa-solid fa-angle-left"></i>
+
+                </a>
+
+            <?php endif; ?>
+
+            <?php for($i=1;$i<=$totalPages;$i++): ?>
+
+                <a
+                    href="?page=<?= $i ?>"
+                    class="page-btn <?= $i==$page ? 'active' : '' ?>">
+
+                    <?= $i ?>
+
+                </a>
+
+            <?php endfor; ?>
+
+            <?php if($page < $totalPages): ?>
+
+                <a
+                    class="page-btn"
+                    href="?page=<?= $page+1 ?>">
+
+                    <i class="fa-solid fa-angle-right"></i>
+
+                </a>
+
+            <?php endif; ?>
+
+        </div>
 
     </div>
 
 </section>
+
 <!-- ==================================================
      Seller Lead Drawer
 ================================================== -->

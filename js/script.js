@@ -491,3 +491,70 @@ if (buyerForm) {
     });
 
 }
+/*=========================================
+CONTACT FORM
+=========================================*/
+
+const contactForm = document.getElementById("contactForm");
+
+if(contactForm){
+
+    contactForm.addEventListener("submit", function(e){
+
+        e.preventDefault();
+
+        const submitBtn = document.getElementById("contactSubmit");
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Sending...";
+
+        fetch("ajax/contact-form.php",{
+            method:"POST",
+            body:new FormData(contactForm)
+        })
+
+        .then(response => response.json())
+
+        .then(data=>{
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Send Message";
+
+            if(data.success){
+
+                contactForm.reset();
+
+                const modal = document.getElementById("sellerSuccessModal");
+
+                modal.style.display = "flex";
+                document.body.style.overflow = "hidden";
+
+                setTimeout(function(){
+
+                    modal.style.display = "none";
+                    document.body.style.overflow = "";
+
+                },4000);
+
+            }else{
+
+                alert(data.message);
+
+            }
+
+        })
+
+        .catch(error=>{
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Send Message";
+
+            console.error(error);
+
+            alert("Something went wrong. Please try again.");
+
+        });
+
+    });
+
+}

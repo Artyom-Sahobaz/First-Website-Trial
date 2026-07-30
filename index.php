@@ -779,28 +779,32 @@ switch($article['category']){
 
             <div class="contact-form">
 
-                <form>
+                <form id="contactForm">
 
                     <input
-                        type="text"
-                        placeholder="Your Name">
+    type="text"
+    name="full_name"
+    placeholder="Your Name"
+    required>
 
-                    <input
-                        type="email"
-                        placeholder="Email Address">
+<input
+    type="email"
+    name="email"
+    placeholder="Email Address"
+    required>
 
-                    <input
-                        type="text"
-                        placeholder="Subject">
+<textarea
+    name="message"
+    placeholder="Your Message"
+    required></textarea>
 
-                    <textarea
-                        placeholder="Your Message"></textarea>
+<button
+    type="submit"
+    id="contactSubmit">
 
-                    <button>
+    Send Message
 
-                        Send Message
-
-                    </button>
+</button>
 
                 </form>
 

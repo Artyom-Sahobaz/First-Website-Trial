@@ -194,15 +194,14 @@ background:#25673a;
 </div>
 <div class="form-group">
 
-<label>SEO Keywords</label>
+    <label>SEO Keywords</label>
 
-<input
-type="text"
-name="meta_keywords"
-value="<?= htmlspecialchars($article['meta_keywords']); ?>">
+    <input
+        type="text"
+        name="meta_keywords"
+        placeholder="mobile homes, cash buyers, sell mobile home">
 
 </div>
-
 <div class="form-group">
 
 <label>Status</label>

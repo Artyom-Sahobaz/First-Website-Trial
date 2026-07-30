@@ -38,19 +38,30 @@
             </li>
 
             <li>
-                <a href="buyer-leads.php"
-                   class="<?= basename($_SERVER['PHP_SELF']) == 'buyer-leads.php' ? 'active' : ''; ?>">
+    <a href="buyer-leads.php"
+       class="<?= basename($_SERVER['PHP_SELF']) == 'buyer-leads.php' ? 'active' : ''; ?>">
 
-                    <i class="fa-solid fa-users"></i>
+        <i class="fa-solid fa-users"></i>
 
-                    <span>Buyer Leads</span>
+        <span>Buyer Leads</span>
 
-                </a>
-            </li>
+    </a>
+</li>
 
-            <li>
-                <a href="articles.php"
-                   class="<?= basename($_SERVER['PHP_SELF']) == 'articles.php' ? 'active' : ''; ?>">
+<li>
+    <a href="contact-messages.php"
+       class="<?= basename($_SERVER['PHP_SELF']) == 'contact-messages.php' ? 'active' : ''; ?>">
+
+        <i class="fa-solid fa-envelope"></i>
+
+        <span>Contact Messages</span>
+
+    </a>
+</li>
+
+<li>
+    <a href="articles.php"
+       class="<?= basename($_SERVER['PHP_SELF']) == 'articles.php' ? 'active' : ''; ?>">
 
                     <i class="fa-solid fa-newspaper"></i>
 
@@ -60,8 +71,8 @@
             </li>
 
             <li>
-                <a href="article-add.php"
-                   class="<?= basename($_SERVER['PHP_SELF']) == 'article-add.php' ? 'active' : ''; ?>">
+                <a href="add-article.php"
+                   class="<?= basename($_SERVER['PHP_SELF']) == 'add-article.php' ? 'active' : ''; ?>">
 
                     <i class="fa-solid fa-plus"></i>
 
