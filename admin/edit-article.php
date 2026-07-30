@@ -42,10 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $filename = time() . "_" . basename($_FILES['featured_image']['name']);
 
-        $target = "../images/uploads/" . $filename;
+        $target = "../images/" . $filename;
 
         if (move_uploaded_file($_FILES['featured_image']['tmp_name'], $target)) {
-            $featured_image = "images/uploads/" . $filename;
+            $featured_image = "images/" . $filename;
         }
     }
 
