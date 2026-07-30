@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST['password']);
 
     // Temporary login
-    if ($username === "sahobaz" && $password === "sadat789") {
+    if ($username === "CASH4MH/admin" && $password === "Derek@789") {
 
         $_SESSION['admin'] = true;
 
