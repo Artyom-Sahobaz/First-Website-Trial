@@ -60,7 +60,8 @@ $canonical = $canonicalUrl ??
 
 <meta name="twitter:image" content="<?= htmlspecialchars($image); ?>">
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=<?= time(); ?>">
+<link rel="stylesheet" href="css/responsive.css?v=<?= time(); ?>">
 
 <?php if(isset($schemaData)): ?>
 
