@@ -1,9 +1,9 @@
 <?php
 
-$host = "127.0.0.1";
-$dbname = "cash4mobilehomes";
-$username = "root";
-$password = "";
+$host = "localhost";
+$dbname = "cash4mh";
+$username = "cash4mh1";
+$password = "Derek@789";
 
 try {
 
