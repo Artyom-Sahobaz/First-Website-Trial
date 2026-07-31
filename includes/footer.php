@@ -16,7 +16,7 @@
 
                 <p>
 
-                    Helping homeowners across USA buy and sell mobile homes
+                    Helping homeowners across states to buy and sell mobile homes
                     with confidence through fair offers, honest service, and a
                     hassle-free process.
 
