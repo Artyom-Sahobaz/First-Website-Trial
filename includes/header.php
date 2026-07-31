@@ -83,25 +83,24 @@ $canonical = $canonicalUrl ??
             <span class="green-text">Cash4Mobile</span><span class="blue-text">Homes</span>
         </a>
 
-        <nav>
+        <nav class="nav">
 
-            <ul class="nav-links">
+    <button class="menu-toggle" id="menuToggle">
+        ☰
+    </button>
 
-                <li><a href="index.php">Home</a></li>
+    <ul class="nav-links" id="navLinks">
 
-                <li><a href="index.php#how-it-works">How It Works</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="index.php#how-it-works">How It Works</a></li>
+        <li><a href="index.php#seller-form">Sell</a></li>
+        <li><a href="index.php#buy">Buy</a></li>
+        <li><a href="resources.php">Resources</a></li>
+        <li><a href="index.php#contact">Contact Us</a></li>
 
-                <li><a href="index.php#seller-form">Sell</a></li>
+    </ul>
 
-                <li><a href="index.php#buy">Buy</a></li>
-
-                <li><a href="resources.php">Resources</a></li>
-
-                <li><a href="index.php#contact">Contact Us</a></li>
-
-            </ul>
-
-        </nav>
+</nav>
 
       </div>
 

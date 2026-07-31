@@ -1,0 +1,129 @@
+/* =====================================================
+   RESPONSIVE.CSS
+   Cash 4 Mobile Homes
+===================================================== */
+
+/* Images */
+img{
+    max-width:100%;
+    height:auto;
+}
+
+/* Prevent horizontal scrolling */
+html,
+body{
+    overflow-x:hidden;
+}
+
+/* Videos & iframes */
+iframe,
+video{
+    max-width:100%;
+}
+
+/* ======================================
+   TABLETS
+====================================== */
+
+@media (max-width:992px){
+
+.container{
+    width:95%;
+}
+
+.hero{
+    flex-direction:column;
+    text-align:center;
+}
+
+.grid-2,
+.grid-3,
+.grid-4{
+    grid-template-columns:1fr 1fr;
+}
+
+}
+
+/* ======================================
+   MOBILE
+====================================== */
+
+@media (max-width:768px){
+
+.container{
+    width:95%;
+}
+
+section{
+    padding:50px 0;
+}
+
+.hero{
+    flex-direction:column;
+    gap:30px;
+}
+
+.grid-2,
+.grid-3,
+.grid-4{
+    grid-template-columns:1fr;
+}
+
+.form-row{
+    flex-direction:column;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+}
+
+button,
+.btn{
+    width:100%;
+}
+
+h1{
+    font-size:36px;
+}
+
+h2{
+    font-size:28px;
+}
+
+h3{
+    font-size:22px;
+}
+
+p{
+    font-size:16px;
+    line-height:1.6;
+}
+
+table{
+    display:block;
+    overflow-x:auto;
+}
+
+}
+
+/* ======================================
+   SMALL PHONES
+====================================== */
+
+@media (max-width:480px){
+
+h1{
+    font-size:30px;
+}
+
+h2{
+    font-size:24px;
+}
+
+.container{
+    width:94%;
+}
+
+}
