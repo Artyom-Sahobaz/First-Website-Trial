@@ -3460,8 +3460,10 @@ Responsive
     }
 
     .nav{
+        position:relative;
         display:flex;
         align-items:center;
+        justify-content:flex-end;
     }
 
     .menu-toggle{
@@ -3470,12 +3472,14 @@ Responsive
         justify-content:center;
     }
 
-    .nav-links{
-        display:none;
-        position:absolute;
-        top:72px;
-        right:0;
-        width:280px;
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:72px;
+    right:0;
+    left:auto;
+    z-index:9999;
+    width:280px;
         background:#fff;
         flex-direction:column;
         gap:18px;
