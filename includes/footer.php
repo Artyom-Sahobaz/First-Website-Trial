@@ -56,7 +56,8 @@
 
                 <p>📍 Alabama, USA</p>
 
-                <a href="tel:+11234567890">(123) 456-7890</a>
+                <a href="tel:+13343241139">334-324-1139</a>
+                <a href="tel:+17707443075"> 770-744-3075</a>
 
                 <a href="mailto:hello@cash4mobilehomes.com">
 

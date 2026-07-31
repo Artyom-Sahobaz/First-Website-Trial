@@ -762,7 +762,8 @@ switch($article['category']){
                              alt="Cash4MobileHomes Logo">
                        </div>      
 
-                    <p>📞 (123) 456-7890</p>
+                    <p>📞 334-324-1139</p>
+                    <p>📞 770-744-3075</p>
 
                     <p>✉ hello@cash4mobilehomes.com</p>
 
