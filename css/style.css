@@ -3511,3 +3511,80 @@ Responsive
     }
 
 }
+/* =====================================================
+   LEGAL PAGES
+===================================================== */
+
+.page-hero{
+
+    padding:90px 0 60px;
+    background:linear-gradient(135deg,#F8FCFF,#F2FAF6);
+    text-align:center;
+
+}
+
+.page-hero h1{
+
+    font-size:48px;
+    color:#17375E;
+    margin-bottom:20px;
+
+}
+
+.page-hero p{
+
+    max-width:720px;
+    margin:auto;
+    font-size:18px;
+    color:#5E6E8C;
+    line-height:1.8;
+
+}
+
+.page-content{
+
+    padding:80px 0;
+
+}
+
+.legal-content{
+
+    max-width:900px;
+    margin:auto;
+    background:#fff;
+    padding:50px;
+    border-radius:16px;
+    box-shadow:0 10px 35px rgba(0,0,0,.06);
+
+}
+
+.legal-content h2{
+
+    margin-top:40px;
+    margin-bottom:15px;
+    color:#17375E;
+    font-size:28px;
+
+}
+
+.legal-content p{
+
+    color:#55657E;
+    line-height:1.9;
+    margin-bottom:18px;
+
+}
+
+.legal-content ul{
+
+    margin:20px 0 30px 25px;
+
+}
+
+.legal-content li{
+
+    margin-bottom:12px;
+    color:#55657E;
+    line-height:1.8;
+
+}

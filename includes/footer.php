@@ -94,9 +94,9 @@
 
             <div class="footer-policy">
 
-                <a href="#">Privacy Policy</a>
+                <a href="privacy-policy.php">Privacy Policy</a>
 
-                <a href="#">Terms & Conditions</a>
+<a href="terms-and-conditions.php">Terms & Conditions</a>
 
             </div>
 
