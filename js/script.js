@@ -562,30 +562,38 @@ if(contactForm){
    Mobile Navigation
 ========================================== */
 
-const menuToggle = document.getElementById("menuToggle");
-const navLinks = document.getElementById("navLinks");
+document.addEventListener("DOMContentLoaded", function () {
 
-if (menuToggle && navLinks) {
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
 
-    menuToggle.addEventListener("click", function () {
+    if (!menuToggle || !navLinks) return;
+
+    menuToggle.onclick = function () {
 
         navLinks.classList.toggle("active");
 
-        menuToggle.innerHTML = navLinks.classList.contains("active")
-            ? "✕"
-            : "☰";
+        if (navLinks.classList.contains("active")) {
 
-    });
+            menuToggle.innerHTML = "✕";
 
-    document.querySelectorAll(".nav-links a").forEach(link => {
+        } else {
 
-        link.addEventListener("click", function () {
+            menuToggle.innerHTML = "☰";
+
+        }
+
+    };
+
+    document.querySelectorAll("#navLinks a").forEach(function(link){
+
+        link.onclick = function(){
 
             navLinks.classList.remove("active");
             menuToggle.innerHTML = "☰";
 
-        });
+        };
 
     });
 
-}
+});
